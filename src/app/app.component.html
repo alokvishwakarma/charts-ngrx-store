@@ -1,0 +1,176 @@
+<ng-container *ngIf="viewModel$ | async as viewModel; else loading">
+  <div class="container my-2">
+    <app-header name="{{ name }}"></app-header>
+    <div class="mb-2">
+
+      <button class="btn btn-success btn-sm me-2" (click)="setRange30()" 
+        style="margin-right: 0 !important;
+        background-color:blue;
+        color:white;
+        border-radius:20px;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;" 
+        [style.background-color] = range30Colors[0] 
+        [style.color] = range30Colors[1] >
+        30 days
+      </button>
+      <button class="btn btn-success btn-sm me-2" (click)="setRange60()" 
+        style="margin-right: 0 !important;
+        background-color:white;
+        color:blue;
+        border-radius:0px;" 
+        [style.background-color] = range60Colors[0] 
+        [style.color] = range60Colors[1] >
+       60 days
+      </button>
+      <button class="btn btn-success btn-sm me-2" (click)="setRange90()" 
+        style="margin-right: 0 !important;
+        border-radius:20px;
+        background-color:white;
+        color:blue;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;" 
+        [style.background-color] = range90Colors[0] 
+        [style.color] = range90Colors[1] >
+        90 days
+      </button>
+
+      <button class="btn btn-success btn-sm me-2" (click)="setRange30()" 
+        style="margin-right: 0 !important; float:right;
+        border-radius:20px;
+        background-color:white;
+        color:blue;">
+        Print
+      </button>
+
+    </div>
+    <div style="font-size:small">
+      Showing {{rangePatientCount}} patients from last {{rangeDaysCount}} days of available data from 01/01/2024 to 01/31/2024
+      <br/>
+      <small><i>Only patients with a minimum of 10 days of SG data are included. Last updated on {{todayDateString}}</i></small>
+      <br/>&nbsp;<br/>
+    </div>
+    <div>
+      <div style="float:left;width:48%;border: 1px;font-size:small;
+        border-style: solid; border-color: grey;height:300px">
+        <div style="height:20px;font-size:medium" >
+          <div style="float:left">&nbsp;Time in range&nbsp;</div>
+          <div style="float:right">&nbsp;i&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          <div style="clear:float">&nbsp;</div>
+        </div>
+        <div style="height:5px">&nbsp;</div>
+        <div style="height:2px;" [style.height] = (barchartValues[0]*2) >
+          <div style="height:2px;width:45%;float:left;;" 
+             [style.height] = (barchartValues[0]*2) >&nbsp;</div>
+          <div style="height:2px;width:7%;float:left;background-color:red;" 
+            [style.height] = (barchartValues[0]*2) >&nbsp;</div>
+          <div style="height:2px;width:45%;float:left;line-height:2px;" 
+            [style.height] = (barchartValues[0]*2)>&nbsp;{{barchartValues[0]}}%</div>
+          <div style="clear:float;height:1px;" ></div>
+        </div>
+        <div style="height:30px;" [style.height] = (barchartValues[1]*2) >
+          <div style="height:30px;width:45%;float:left;;" 
+            [style.height] = (barchartValues[1]*2) >&nbsp;</div>
+          <div style="height:30px;width:7%;float:left;background-color:orange;" 
+            [style.height] = (barchartValues[1]*2) >&nbsp;</div>
+          <div style="height:30px;width:45%;float:left;line-height:30px;" 
+            [style.height] = (barchartValues[1]*2)>&nbsp;{{barchartValues[1]}}%</div>
+          <div style="clear:float;height:1px;" ></div>
+        </div>
+        <div style="height:164px;" [style.height] = (barchartValues[2]*2) >
+          <div style="height:164px;width:45%;float:left;" 
+          [style.height] = (barchartValues[2]*2) >&nbsp;</div>
+          <div style="height:164px;width:7%;float:left;background-color:green;"
+          [style.height] = (barchartValues[2]*2) >&nbsp;</div>
+          <div style="height:164px;width:45%;float:left;line-height:164px;" 
+          [style.height] = (barchartValues[2]*2)>&nbsp;{{barchartValues[2]}}%</div>
+          <div style="clear:float;height:1px;" ></div>
+        </div>
+        <div style="height:4px;" [style.height] = (barchartValues[3]*2) >
+          <div style="height:4px;width:45%;float:left;" 
+          [style.height] = (barchartValues[3]*2) >&nbsp;</div>
+          <div style="height:4px;width:7%;float:left;background-color:red;" 
+          [style.height] = (barchartValues[3]*2) >&nbsp;</div>
+          <div style="height:4px;width:45%;float:left;line-height:4px;" 
+          [style.height] = (barchartValues[3]*2)>&nbsp;{{barchartValues[3]}}%</div>
+          <div style="clear:float;height:1px;" ></div>
+        </div>
+        <div style="height:4px;"></div>
+        <div style="height:18px !important;font-size:small">
+          <div style="height:4px;width:24%;float:left;">&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;">40&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;">54&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;">70&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;">180&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;">240&nbsp;</div>
+          <div style="height:10px;width:24%;float:left;">&nbsp;</div>
+          <div style="clear:float;height:1px;width:1%" ></div>
+        </div>
+        <div style="height:10px !important;">
+          <div style="height:4px;width:24%;float:left;">&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;background-color:red">&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;background-color:orange">&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;background-color:green">&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;background-color:blue">&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;background-color:red">&nbsp;</div>
+          <div style="height:10px;width:24%;float:left;">&nbsp;</div>
+          <div style="clear:float;height:1px;width:1%" ></div>
+        </div>
+        <div style="height:10px !important;">
+          <div style="height:4px;width:44%;float:left;">&nbsp;</div>
+          <div style="height:10px;width:10%;float:left;text-align:center">&nbsp;mg/dL&nbsp;</div>
+          <div style="height:10px;width:44%;float:left;">&nbsp;</div>
+          <div style="clear:float;height:1px;width:1%" ></div>
+        </div>
+        <div style="height:4px;"></div>
+      </div>
+      <div style="float:left;width:3%;border: 0px;">&nbsp;
+      </div>
+      <div style="float:left;width:48%;border: 1px;font-size:small;
+      border-style: solid; border-color: grey;height:300px">
+      <div style="height:20px;font-size:medium" >
+        <div style="float:left">&nbsp;Glucose Management Indicator (GMI)&nbsp;</div>
+        <div style="float:right">&nbsp;</div>
+        <div style="clear:float">&nbsp;</div>
+      </div>
+      <div style="height:5px">&nbsp;</div>
+      <div style="height:200px;">
+        &nbsp;Pie chart&nbsp;
+      </div>
+      <div style="height:4px;"></div>
+      <div style="height:18px !important;font-size:small">
+        <div style="height:4px;width:34%;float:left;">&nbsp;</div>
+        <div style="height:10px;width:10%;float:left;text-align:left"><7%&nbsp;</div>
+        <div style="height:10px;width:10%;float:left;text-align:center">7-8%&nbsp;</div>
+        <div style="height:10px;width:10%;float:left;text-align:right">>8%&nbsp;</div>
+        <div style="height:10px;width:34%;float:left;">&nbsp;</div>
+        <div style="clear:float;height:1px;width:1%" ></div>
+      </div>
+      <div style="height:10px !important;">
+        <div style="height:4px;width:34%;float:left;">&nbsp;</div>
+        <div style="height:10px;width:10%;float:left;background-color:green">&nbsp;</div>
+        <div style="height:10px;width:10%;float:left;background-color:orange">&nbsp;</div>
+        <div style="height:10px;width:10%;float:left;background-color:red">&nbsp;</div>
+        <div style="height:10px;width:34%;float:left;">&nbsp;</div>
+        <div style="clear:float;height:1px;width:1%" ></div>
+      </div>
+      <div style="height:10px !important;">
+        <div style="height:4px;width:44%;float:left;">&nbsp;</div>
+        <div style="height:10px;width:10%;float:left;text-align:center">&nbsp;GMI (%)&nbsp;</div>
+        <div style="height:10px;width:44%;float:left;">&nbsp;</div>
+        <div style="clear:float;height:1px;width:1%" ></div>
+      </div>
+      <div style="height:4px;"></div>
+    </div>
+      <div style="clear:left"></div>
+    </div>
+
+  </div>
+</ng-container>
+<ng-template #loading>
+  <div class="container my-2">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ng-template>
